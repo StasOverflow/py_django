@@ -5,7 +5,9 @@ from .models import Post
 
 
 class PostAdmin(admin.ModelAdmin):
-    pass
+    exclude = ('updated_on',)
+    list_display = ('title', 'created_on',)
+    list_filter = ('created_on', 'title', )
 
 
 admin.site.register(Post, PostAdmin)
