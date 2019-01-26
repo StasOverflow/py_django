@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'posts',
+    'groups',
 ]
 
 MIDDLEWARE = [
@@ -121,3 +122,9 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 STATIC_ROOT = 'assets/'
+
+try:
+    from .settings_local import *
+except ImportError as e:
+    print(e)
+
