@@ -11,7 +11,6 @@ from django.http import JsonResponse
 def index(request):
     params = request.GET.dict()
     group_name = ''
-    out_string = ''
     if 'group_name' in params:
         group_name = params['group_name']
         out_string = 'Got one'

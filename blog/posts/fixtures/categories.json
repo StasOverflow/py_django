@@ -1,0 +1,22 @@
+[
+{
+  "model": "posts.category",
+  "pk": 2,
+  "fields": {
+    "name": "Nature",
+    "is_active": true,
+    "meta_keywords": "",
+    "description": "ff"
+  }
+},
+{
+  "model": "posts.category",
+  "pk": 3,
+  "fields": {
+    "name": "Loosing mah religion",
+    "is_active": true,
+    "meta_keywords": "",
+    "description": "1"
+  }
+}
+]
