@@ -4,7 +4,7 @@
 
   {% for post in posts %}
     <h1>
-      <a href="{% url 'post' post.id %}" >
+      <a href="{% url 'posts:post' post.id %}" >
         {{post.title}}
       </a>
     </h1>
