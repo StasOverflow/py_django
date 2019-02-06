@@ -39,6 +39,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'posts',
     'groups',
+    'debug_toolbar',
+    'tags',
 ]
 
 MIDDLEWARE = [
@@ -49,6 +51,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'debug_toolbar.middleware.DebugToolbarMiddleware',
 ]
 
 ROOT_URLCONF = 'blog.urls'
@@ -128,10 +131,11 @@ LOGGING = {
             'filename': './debug.log',
         },
         'mail_admins': {
-            'level': 'INFO',
+            'level': 'ERROR',
             'class': 'django.utils.log.AdminEmailHandler',
-            'email_backend': 'django.core.mail.backends.console.EmailBackend',
+            'email_backend': 'django.core.mail.backends.filebased.EmailBackend',
         },
+
     },
     'loggers': {
         'django': {
@@ -142,6 +146,10 @@ LOGGING = {
             'handlers': ['file', 'mail_admins'],
             'level': 'INFO',
         },
+        # 'django.db.backends': {
+        #     'handlers': ['console'],
+        #     'level': 'DEBUG',
+        # }
     },
 }
 # Static files (CSS, JavaScript, Images)
@@ -150,6 +158,9 @@ LOGGING = {
 STATIC_URL = '/static/'
 
 STATIC_ROOT = 'assets/'
+
+EMAIL_FILE_PATH = './tmp/logs/'
+ADMINS = [('JOHN', 'vasily_valisyevich@gmail.com')]
 
 try:
     from .settings_local import *

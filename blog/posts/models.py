@@ -1,4 +1,6 @@
 from django.db import models
+from django.contrib.contenttypes.fields import GenericRelation
+from tags.models import TaggedItem
 
 
 # Create your models here.
@@ -18,6 +20,7 @@ class Post(models.Model):
     keywords = models.TextField(max_length=500, blank=True)
     created_on = models.DateTimeField(auto_now_add=True)
     updated_on = models.DateField(auto_now=True)
+    tags = GenericRelation(TaggedItem)
 
     class Meta:
         ordering = ['-updated_on']
@@ -31,6 +34,7 @@ class Category(models.Model):
     is_active = models.BooleanField()
     meta_keywords = models.TextField(max_length=500, blank=True)
     description = models.TextField()
+    tags = GenericRelation(TaggedItem)
 
     def __str__(self):
         return self.name
