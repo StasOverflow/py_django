@@ -4,6 +4,10 @@ from django.http import HttpResponseRedirect
 from django.shortcuts import render, redirect, reverse
 from .models import Post
 from django.views.generic import ListView
+from django.contrib.auth import authenticate
+from django.contrib.auth import login
+from django.shortcuts import Http404
+
 
 from .forms import PostForm
 
@@ -32,10 +36,13 @@ def index(request):
 
 
 def post_profile(request, post_id):
+    cnt = request.session.get('cnt', 0)
+    cnt += 1
+    request.session['cnt'] = cnt
     print(post_id)
     post = Post.objects.filter(id=post_id).first()
     print(post)
-    return render(request, 'posts/post_profile.html', context={"post": post})
+    return render(request, 'posts/post_profile.html', context={"post": post, 'cnt': cnt})
 
 
 def add_post(request):
@@ -59,3 +66,13 @@ def add_post(request):
     return render(request, 'posts/add_post.html', {'form': form})
 
 
+def login_user(request):
+    if request.method == 'POST':
+        user = authenticate(username=request.POST['login'], password=request.POST['pass'])
+
+        if user is None:
+            raise Http404("something went wrong")
+        login(request, user)
+        return redirect('/posts/')
+
+    return render(request, 'posts/login.html')

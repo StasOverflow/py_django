@@ -1,5 +1,6 @@
 from django.contrib import admin
 
+from django.contrib.auth.models import Permission
 # Register your models here.
 from .models import Post, Category
 
@@ -18,3 +19,4 @@ class CategoryAdmin(admin.ModelAdmin):
 
 admin.site.register(Post, PostAdmin)
 admin.site.register(Category, CategoryAdmin)
+admin.site.register(Permission)
