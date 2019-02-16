@@ -7,6 +7,9 @@ from django.views.generic import ListView
 from django.contrib.auth import authenticate
 from django.contrib.auth import login
 from django.shortcuts import Http404
+import time
+from django.views.decorators.cache import cache_page
+from django.utils.translation import gettext_lazy as _
 
 
 from .forms import PostForm
@@ -24,12 +27,15 @@ class PostCategoryLiew(ListView):
     context_object_name = 'posts'
 
     def get_queryset(self):
+        print(self.kwargs['category_id'])
         category_id = self.kwargs['category_id']
-        print(self.kwargs)
+        time.sleep(5)
         return self.model.objects.filter(category__id=category_id)
 
 
+@cache_page(timeout=3600)
 def index(request):
+    time.sleep(4)
     return render(request, 'posts/index.html', context={"posts": Post.objects.select_related('category').all()})
     # print(request.GET.dict()['group_name'])
     # return HttpResponse(str(request.GET.dict()))
@@ -70,8 +76,10 @@ def login_user(request):
     if request.method == 'POST':
         user = authenticate(username=request.POST['login'], password=request.POST['pass'])
 
+        error_string = _("something went wrong")
+        print(error_string)
         if user is None:
-            raise Http404("something went wrong")
+            raise Http404(error_string)
         login(request, user)
         return redirect('/posts/')
 

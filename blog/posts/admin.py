@@ -13,7 +13,7 @@ class PostAdmin(admin.ModelAdmin):
 
 class CategoryAdmin(admin.ModelAdmin):
     exclude = ('meta_keywords',)
-    list_display = ('name', 'is_active', 'description')
+    list_display = ('name', 'is_active', 'description', 'id')
     list_filter = ('description', 'name', )
 
 
