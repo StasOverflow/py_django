@@ -35,7 +35,7 @@ class PostCategoryLiew(ListView):
 
 @cache_page(timeout=3600)
 def index(request):
-    time.sleep(4)
+    time.sleep(2)
     return render(request, 'posts/index.html', context={"posts": Post.objects.select_related('category').all()})
     # print(request.GET.dict()['group_name'])
     # return HttpResponse(str(request.GET.dict()))

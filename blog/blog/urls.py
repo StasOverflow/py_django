@@ -22,6 +22,7 @@ urlpatterns = [
     path('posts/', include('posts.urls')),
     path('groups/', include('groups.urls')),
     path('i18n/', include('django.conf.urls.i18n')),
+    path('api-auth/', include('rest_framework.urls')),
 ]
 
 if settings.DEBUG:
