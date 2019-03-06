@@ -4,12 +4,12 @@
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'blog',
-        'USER': 'blog_user',
-        'PASSWORD': 'aezakmi123',
-        'HOST': '127.0.0.1',
+        'NAME': 'postgres',
+        'USER': 'postgres',
+        'PASSWORD': 'postgres',
+        'HOST': '172.17.0.2',
         'PORT': '5432',
     }
 }
 
-INTERNAL_IPS =['127.0.0.1']
+INTERNAL_IPS = ['127.0.0.1']
